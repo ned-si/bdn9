@@ -17,25 +17,25 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
-        | Knob 1: Pg Dn/Up |       | Knob 2: Vol Dn/Up  |
-        | Press: Mute        | Up    | Press: Play/Pause  |
-        | Left               | Down  | Right              |
-        | Hold: layer1       | MPrev | Media Next         |
+        | Knob 1: Pg Dn/Up |       | Knob 2: Vol Dn/Up |
+        | Press: Mute      | Up    | Press: Play/Pause |
+        | Left             | Down  | Right             |
+        | Hold: layer1     | MPrev | Media Next        |
      */
     [0] = LAYOUT(
-        KC_MUTE, KC_UP,   KC_MPLY,
-        KC_LEFT, KC_DOWN, KC_RIGHT,
-        MO(1),   KC_MPRV, KC_MNXT
+        KC_MUTE,     KC_UP,    KC_MPLY,
+        KC_LEFT,     KC_DOWN,  KC_RIGHT,
+        MO(1),       KC_MPRV,  KC_MNXT
     ),
-    /*  Right Ctrl, Alt, Shift, F keys
+    /*  Right Ctrl,  Alt,      Shift,     F keys
         | RESET | F5   | Media Stop |
         | F1    | F2   | F3         |
         |       | Home | End        |
      */
     [1] = LAYOUT(
-        RESET     , MEH(KC_F5) , KC_STOP,
-        MEH(KC_F1), MEH(KC_F2) , MEH(KC_F3),
-        _______   , KC_HOME    , KC_END 
+        RESET ,      MEH(KC_F5) ,  KC_STOP,
+        MEH(KC_F1),  MEH(KC_F2) ,  MEH(KC_F3),
+        _______   ,  KC_HOME    ,  KC_END
     ),
 };
 
