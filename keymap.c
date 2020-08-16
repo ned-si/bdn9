@@ -16,37 +16,42 @@
 #include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /*
-        | Knob 1: Pg Dn/Up |       | Knob 2: Vol Dn/Up |
-        | Press: Mute      | Up    | Press: Play/Pause |
-        | Left             | Down  | Right             |
-        | Hold: layer1     | MPrev | Media Next        |
+    /*  left ctrl,  alt,      shift,     f keys
+        | knob 1: toggle layer0/1 |            | knob 2: vol dn/up 
+        | press:                  | f4         | press: mute       
+        | f1                      | f2         | f3                
+        | media previous          | play/pause | media next        
      */
     [0] = LAYOUT(
-        KC_MUTE,     KC_UP,    KC_MPLY,
-        KC_LEFT,     KC_DOWN,  KC_RIGHT,
-        MO(1),       KC_MPRV,  KC_MNXT
+        KC_NO    ,   MEH(KC_F4),   KC_MUTE,
+        MEH(KC_F1),  MEH(KC_F2) ,  MEH(KC_F3),
+        KC_MPRV,     KC_MPLY,      KC_MNXT
     ),
-    /*  Right Ctrl,  Alt,      Shift,     F keys
-        | RESET | F5   | Media Stop |
-        | F1    | F2   | F3         |
-        |       | Home | End        |
+    /* LAYER1
+        | RESET | F11 | F12 |
+        | F8    | F9  | F10 |
+        | F5    | F6  | F7  |
      */
     [1] = LAYOUT(
-        RESET ,      MEH(KC_F5) ,  KC_STOP,
-        MEH(KC_F1),  MEH(KC_F2) ,  MEH(KC_F3),
-        _______   ,  KC_HOME    ,  KC_END
+        RESET     ,  MEH(KC_F11),  MEH(KC_F12),
+        MEH(KC_F8),  MEH(KC_F9) ,  MEH(KC_F10),
+        MEH(KC_F5),  MEH(KC_F6) ,  MEH(KC_F7)
     ),
 };
-
+uint8_t selected_layer = 0;
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_MS_WH_UP);
-        } else {
-            tap_code(KC_MS_WH_DOWN);
-        }
-    }
+			switch (index) {
+				case 0:
+					if (!clockwise && selected_layer  < 10) {
+						selected_layer ++;
+					} else if (clockwise && selected_layer  > 0){
+						selected_layer --;
+					}
+				layer_clear();
+				layer_on(selected_layer);
+			}			
+		}
     else if (index == 1) {
         if (clockwise) {
             tap_code(KC_VOLD);
