@@ -1,0 +1,25 @@
+# bdn9
+
+My QMK keymap for the [Keebio BDN9](https://keeb.io/products/bdn9-3x3-9-key-macropad-rotary-encoder-support) rev1 macropad.
+
+It is cloned inside my
+[qmk-userspace](https://github.com/ned-si/qmk-userspace) checkout, at
+`keyboards/keebio/bdn9/keymaps/nedsi` (git-ignored there, so the userspace always
+builds whatever this clone has checked out).
+
+It is standalone: `rules.mk` sets `USER_NAME := nedsi_none` so the shared
+`users/nedsi` code is not built in. The left encoder steps through the layers,
+the right one is volume.
+
+## Build and flash
+
+From a machine set up as described in the qmk-userspace README:
+
+```sh
+qmk compile -kb keebio/bdn9/rev1 -km nedsi
+qmk flash   -kb keebio/bdn9/rev1 -km nedsi
+```
+
+Bootloader: press the reset button, or `QK_BOOT` (top-left key
+on layer 1). The Pro Micro uses the Caterina bootloader, which only waits about
+8 seconds: start `qmk flash` first.
