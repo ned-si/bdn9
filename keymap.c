@@ -28,18 +28,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MPRV,     KC_MPLY,      KC_MNXT
     ),
     /* LAYER1
-        | RESET | F11 | F12 |
+        | QK_BOOT | F11 | F12 |
         | F8    | F9  | F10 |
         | F5    | F6  | F7  |
      */
     [1] = LAYOUT(
-        RESET     ,  MEH(KC_F11),  MEH(KC_F12),
+        QK_BOOT     ,  MEH(KC_F11),  MEH(KC_F12),
         MEH(KC_F8),  MEH(KC_F9) ,  MEH(KC_F10),
         MEH(KC_F5),  MEH(KC_F6) ,  MEH(KC_F7)
     ),
 };
 uint8_t selected_layer = 0;
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
 			switch (index) {
 				case 0:
@@ -59,4 +59,5 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             tap_code(KC_VOLU);
         }
     }
+    return false;
 }
